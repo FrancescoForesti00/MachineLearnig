@@ -1,0 +1,2 @@
+class Hedge:
+    print('Hedge')
