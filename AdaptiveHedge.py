@@ -2,11 +2,10 @@ import math
 import numpy as np
 
 def algo():
-    print('Configure Hedge Algorithm\n')
+    print('Configure AdaptiveHedge Algorithm\n')
     print('Select losses type:\n1)Stochastic_losses\n2)Adversarial_losses\n3)Low-gap_losses\n')
     loss_choice = int(input())
-    #print('Select learning rate\n')
-    learning_rate = 0.5#float(input())
+
     print('Enter the number K of desired experts\n')
     k =  int(input())
     print('Enter the number of turns T\n')
@@ -19,9 +18,9 @@ def algo():
     losses = [[]]
     losses = np.loadtxt((loss_choice == 1)*'Stochastic_losses.txt' + (loss_choice == 2)*'Adversarial_losses.txt' + (loss_choice == 3)*'Low-gap_losses.txt', usecols=range(k))
 
-
-
+    learning_rate = 1
     for t in range(T):
+
         somma = 0
         #define the distribution p
         for i in range(k):
@@ -39,5 +38,4 @@ def algo():
 
 
 
-    #print(sum(weights))
-    #print(sum(probabilities))
+    print(probabilities)
