@@ -53,6 +53,7 @@ elif choice == '3':
             loss_probability[i] = 0.5
     losses = rng.binomial(1, loss_probability, size=(T, k))
 
+#stampa su di un file
 with open((choice =='1')*'Stochastic_losses.txt' + (choice == '2')*'Adversarial_losses' + (choice == '3')*'Low-gap_losses', 'w') as f:
     for t in losses:
         f.write(' '.join([str(a) for a in t]) + '\n')
