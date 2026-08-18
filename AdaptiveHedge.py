@@ -1,3 +1,6 @@
+#Implementation from scratch of the adaptive edege algorithm
+
+
 import math
 import numpy as np
 
@@ -8,6 +11,7 @@ def algo():
 
     print('Enter the number K of desired experts\n')
     k =  int(input())
+
     print('Enter the number of turns T\n')
     T = int(input())
 
@@ -20,8 +24,8 @@ def algo():
 
     learning_rate = 1
     for t in range(T):
-
         somma = 0
+
         #define the distribution p
         for i in range(k):
             somma = somma + weights[i]

@@ -19,7 +19,7 @@ k: int = int(input())
 print('Select the number of turns\n')
 T: int = int(input())
 
-losses = [[9]*k]*T
+losses = [[9]*k]*T#TODO wtf is this
 loss_probability = [0]*k
 rng = np.random.default_rng()
 
