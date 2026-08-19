@@ -3,6 +3,10 @@
 
 import math
 import numpy as np
+#import matplotlib.pyplot as plt
+
+
+
 
 def algo():
     print('Configure Hedge Algorithm\n')
@@ -21,12 +25,15 @@ def algo():
     T = int(input())
 
 
-    #initialization TODO: implementare in modo che le losses vengano generate automaticamente qui? oppure mantengo le cose separate?
+    #initialization
     index_selection = [i for i in range(k)]
     weights = [1 for i in range(k)]
     probabilities = [0 for i in range(k)]
     losses = np.loadtxt((loss_choice == 1)*'Stochastic_losses.txt' + (loss_choice == 2)*'Adversarial_losses.txt' + (loss_choice == 3)*'Low-gap_losses.txt', usecols=range(k))
 
+    info_for_plot = []
+    expert_losses = [0 for i in range(k)]
+    cumulative_loss = 0
 
     for t in range(T):
         somma = 0
@@ -39,12 +46,23 @@ def algo():
         #draw I according to p
         chosen = np.random.choice(index_selection, None, True ,probabilities)
         print(chosen)
-        #TODO decidere cosa salvarsi per il plot
+
+        #cumulative loss update
+        cumulative_loss = cumulative_loss + losses[t][chosen]
+
+        #expert losses update
+        for i in range(k):
+            expert_losses[i] = expert_losses[i] + losses[t][i]
+
+        # regret
+        regret = cumulative_loss/t - min(expert_losses)/t
+
+        #update info for plot
+        info_for_plot.append((t, cumulative_loss, regret))
+
         #update the weights
         for i in range(k):
             weights[i] = weights[i]*math.exp(-(learning_rate*losses[t][i]))
 
 
-
-    #print(sum(weights))
-    #print(sum(probabilities))
+    #TODO plot cumulative loss, regret vs time
