@@ -5,7 +5,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-#TODO funziona troppo bene evidentemente c'è qualcosa di sbagliato (probabilità selezione, modo in cui vengono conteggiati cumulative losses/regret...)
+#TODO funziona troppo bene evidentemente c'è qualcosa di sbagliato (probabilità selezione(ok), modo in cui vengono conteggiati cumulative losses/regret...)
 
 
 def algo():
@@ -40,7 +40,7 @@ def algo():
     index_selection = [i for i in range(k)]
     weights = [1 for i in range(k)]
     probabilities = [0 for i in range(k)]
-    regret = [0] * T
+    regret = [0 for i in range(T)]
     cumulative_loss = [0] * T
     expert_losses = [0 for i in range(k)]
 
@@ -74,9 +74,12 @@ def algo():
         for i in range(k):
             weights[i] = weights[i]*math.exp(-(learning_rate*losses[t][i]))
 
-    print(regret)
-    print(cumulative_loss)
+    print(regret[T - 1])
+    print(min(expert_losses))
+    print(cumulative_loss[T - 1])
 
-    #plot TODO migliorare data visualization
-    plt.plot([(i + 1) for i in range(T)], cumulative_loss, "b-", [(i + 1) for i in range(T)], regret, "r.")
+
+    plt.plot([(i + 1) for i in range(T)], cumulative_loss, "b-", label= "cumulative loss")
+    plt.plot( [(i + 1) for i in range(T)], regret, "r.", label = "regret")
+    plt.legend(loc = 'upper left')
     plt.show()
