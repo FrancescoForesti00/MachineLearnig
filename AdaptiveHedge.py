@@ -35,13 +35,14 @@ def algo():
     delta = 0
     psi = 1.62
     budget = 0
+    mixability_gap = 0
     learning_rate = psi
     index_selection = [i for i in range(k)]
-    weights = [1/k in range(k)]
-    probabilities = [0 in range(k)]
-    regret = [0 in range(t_max)]
+    weights = [1/k] * k
+    probabilities = [0] * k
+    regret = [0] * t_max
     cumulative_loss = [0] * t_max
-    expert_losses = [0 in range(k)]
+    expert_losses = [0] * k
 
     for t in range(t_max):
         #if is the first round or the cumulative mixability gap exceeded the budget
@@ -52,7 +53,7 @@ def algo():
             learning_rate = learning_rate/psi
             budget = (1/(math.e - 1) + 1/learning_rate)*math.log(k)
             delta = 0
-            weights = [1/k in range(k)]
+            weights = [1/k] * k
 
         ##make a decision
 
@@ -60,7 +61,7 @@ def algo():
         somma = sum(weights)
 
         for i in range(k):
-            probabilities[i] = weights[i] / somma
+            probabilities[i] = weights[i]/somma
 
         # draw I according to p
         chosen = np.random.choice(index_selection, None, True, probabilities)
@@ -79,10 +80,14 @@ def algo():
         ##prepare for next round
 
         #update the value of  the cumulative mixabilty gap TODO: check che funzioni
-        delta = delta + numpy.inner(weights, losses[t]) + 1/learning_rate * math.log(weights * math.exp(-learning_rate * losses[t][chosen]))
+        mixability_gap = 0
+        for i in range(k):
+            mixability_gap = mixability_gap + weights[i] * math.exp(- learning_rate * losses[t][i])
+        delta = delta + numpy.inner(weights, losses[t]) + 1/learning_rate * math.log(mixability_gap)
 
         #update weights vector TODO: check che funzioni
-        weights = numpy.inner(weights, math.exp(-learning_rate * losses[t]))/(weights * math.exp(-learning_rate * losses[t][chosen]))
+        for i in range(k):
+            weights[i] = weights[i] * math.exp(- learning_rate * losses[t][i])/mixability_gap
 
     print(regret[t_max - 1])
     print(min(expert_losses))
