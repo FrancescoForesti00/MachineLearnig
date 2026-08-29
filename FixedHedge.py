@@ -5,9 +5,6 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-#TODO funziona troppo bene evidentemente c'è qualcosa di sbagliato (probabilità selezione(ok), modo in cui vengono conteggiati cumulative losses/regret...)
-
-
 def algo():
     print('Configure Hedge Algorithm\n')
 
@@ -18,7 +15,7 @@ def algo():
     k = int(input())
 
     print('Enter the number of turns T\n')
-    T = int(input())
+    t_max = int(input())
 
     if loss_choice == 1:
         losses = np.loadtxt((loss_choice == 1) * 'Stochastic_losses', usecols=range(k))
@@ -28,6 +25,7 @@ def algo():
         losses = np.loadtxt((loss_choice == 3) * 'Low-gap_losses', usecols=range(k))
     else:
         print('Invalid choice')
+        return
 
     #learning rate selection
     #print('Select learning rate\n')
@@ -38,17 +36,14 @@ def algo():
 
     #initialization
     index_selection = [i for i in range(k)]
-    weights = [1 for i in range(k)]
-    probabilities = [0 for i in range(k)]
-    regret = [0 for i in range(T)]
-    cumulative_loss = [0] * T
-    expert_losses = [0 for i in range(k)]
+    weights = [1 in range(k)]
+    probabilities = [0 in range(k)]
+    regret = [0 in range(t_max)]
+    cumulative_loss = [0] * t_max
+    expert_losses = [0 in range(k)]
 
 
-    print(regret)
-    print(cumulative_loss)
-
-    for t in range(T):
+    for t in range(t_max):
         somma = 0
         #define the distribution p
         for i in range(k):
@@ -74,12 +69,12 @@ def algo():
         for i in range(k):
             weights[i] = weights[i]*math.exp(-(learning_rate*losses[t][i]))
 
-    print(regret[T - 1])
+    print(regret[t_max - 1])
     print(min(expert_losses))
-    print(cumulative_loss[T - 1])
+    print(cumulative_loss[t_max - 1])
 
 
-    plt.plot([(i + 1) for i in range(T)], cumulative_loss, "b-", label= "cumulative loss")
-    plt.plot( [(i + 1) for i in range(T)], regret, "r.", label = "regret")
+    plt.plot([(i + 1) for i in range(t_max)], cumulative_loss, "b-", label= "cumulative loss")
+    plt.plot( [(i + 1) for i in range(t_max)], regret, "r.", label = "regret")
     plt.legend(loc = 'upper left')
     plt.show()
