@@ -1,5 +1,5 @@
 #Implementation from scratch of the hedge algorithm with a fixed learning rate
-
+#TODO: rimozione T
 
 import math
 import numpy as np
@@ -36,18 +36,16 @@ def algo():
 
     #initialization
     index_selection = [i for i in range(k)]
-    weights = [1 in range(k)]
-    probabilities = [0 in range(k)]
-    regret = [0 in range(t_max)]
+    weights = [1] * k
+    probabilities = [0] * k
+    regret = [0] * t_max
     cumulative_loss = [0] * t_max
-    expert_losses = [0 in range(k)]
+    expert_losses = [0] * k
 
 
     for t in range(t_max):
-        somma = 0
         #define the distribution p
-        for i in range(k):
-            somma = somma + weights[i]
+        somma = sum(weights)
         for i in range(k):
             probabilities[i] = weights[i]/somma
 
