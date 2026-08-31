@@ -22,11 +22,11 @@ def algo():
     t_max = int(input())
 
     if loss_choice == 1:
-        losses = np.loadtxt((loss_choice == 1) * 'Stochastic_losses', usecols=range(k))
+        losses = np.loadtxt((loss_choice == 1) * 'Losses//Stochastic_losses', usecols=range(k))
     elif loss_choice == 2:
-        losses = np.loadtxt((loss_choice == 2) * 'Adversarial_losses', usecols=range(k))
+        losses = np.loadtxt((loss_choice == 2) * 'Losses//Adversarial_losses', usecols=range(k))
     elif loss_choice == 3:
-        losses = np.loadtxt((loss_choice == 3) * 'Low-gap_losses', usecols=range(k))
+        losses = np.loadtxt((loss_choice == 3) * 'Losses//Low-gap_losses', usecols=range(k))
     else:
         print('Invalid choice')
         return
