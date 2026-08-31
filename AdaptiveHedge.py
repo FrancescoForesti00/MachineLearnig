@@ -25,7 +25,7 @@ def algo():
     else:
         print('Invalid choice')
         return
-
+    print("Computing...\n")
     k = len(losses[0])
     t_max = len(losses)
 

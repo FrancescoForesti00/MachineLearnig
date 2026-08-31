@@ -23,12 +23,13 @@ def algo():
         return
 
     #learning rate selection
-    #print('Select learning rate\n')
-    learning_rate = 0.5#float(input())
+    print('Select learning rate\n')
+    learning_rate = float(input())
+    print("Computing...\n")
 
     k = len(losses[0])
     t_max = len(losses)
-
+print("Computing...\n")
     #initialization
     index_selection = [i for i in range(k)]
     weights = [1] * k
