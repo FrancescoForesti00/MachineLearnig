@@ -11,18 +11,13 @@ def algo():
     print('Select losses type:\n1)Stochastic_losses\n2)Adversarial_losses\n3)Low-gap_losses\n')
     loss_choice = int(input())
 
-    print('Enter the number K of desired experts\n')
-    k = int(input())
-
-    print('Enter the number of turns T\n')
-    t_max = int(input())
 
     if loss_choice == 1:
-        losses = np.loadtxt((loss_choice == 1) * 'Losses//Stochastic_losses', usecols=range(k))
+        losses = np.loadtxt((loss_choice == 1) * 'Losses//Stochastic_losses')
     elif loss_choice == 2:
-        losses = np.loadtxt((loss_choice == 2) * 'Losses//Adversarial_losses', usecols=range(k))
+        losses = np.loadtxt((loss_choice == 2) * 'Losses//Adversarial_losses')
     elif loss_choice == 3:
-        losses = np.loadtxt((loss_choice == 3) * 'Losses//Low-gap_losses', usecols=range(k))
+        losses = np.loadtxt((loss_choice == 3) * 'Losses//Low-gap_losses')
     else:
         print('Invalid choice')
         return
@@ -31,8 +26,8 @@ def algo():
     #print('Select learning rate\n')
     learning_rate = 0.5#float(input())
 
-
-
+    k = len(losses[0])
+    t_max = len(losses)
 
     #initialization
     index_selection = [i for i in range(k)]
