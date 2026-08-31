@@ -22,7 +22,8 @@ print('Select the number of turns\n')
 T: int = int(input())
 
 losses = [[9]*k]*T
-loss_probability = [0]*k
+loss_probability = [0.0]*k
+adversarial_loss_probability = [[0.0]*k]*T
 rng = np.random.default_rng()
 
 if choice == '1':
@@ -34,18 +35,21 @@ if choice == '1':
             loss_probability[i] = 0.5
     losses = rng.binomial(1, loss_probability, size=(T, k))
 
+
 elif choice == '2':
     #best expert changes over time
     for t in range(T):
         #select one of the experts to be the best
         best_of_turn = random.randint(0, k-1)
+        #print('Best Turn ', t, ':', best_of_turn,  "\n")
         for i in range(k):
             if i == best_of_turn:
-                loss_probability[i] = 0.3
+                adversarial_loss_probability[t][i] = 0.3
             else:
-                loss_probability[i] = 0.5
+                adversarial_loss_probability[t][i] = 0.5
 
-            losses[t][i] = int(rng.binomial(1, loss_probability[i], size=()))
+    losses = rng.binomial(1, adversarial_loss_probability, size=(T, k))
+
 
 
 elif choice == '3':
