@@ -29,7 +29,7 @@ def algo():
 
     k = len(losses[0])
     t_max = len(losses)
-print("Computing...\n")
+    print("Computing...\n")
     #initialization
     index_selection = [i for i in range(k)]
     weights = [1] * k
