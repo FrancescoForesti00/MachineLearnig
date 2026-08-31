@@ -1,7 +1,10 @@
-#test usato per sperimentare con mathplotlib
-import math
+#test usato per sperimentare
 
-import matplotlib.pyplot as plt
+import numpy as np
 
 
-print(math.log(math.e))
+losses = np.loadtxt('Losses//Stochastic_losses')
+T = losses[0]
+n = len(T)
+print(n)
+print(losses)

@@ -1,3 +1,8 @@
 Project for the course Statistical Methods for Machine Learning, Prof Nicolò Cesa-Bianchi
 
+INSTRUCTIONS:
+
+1) run the dataset generation file to creates the synthetic losses
+2) run the console file to utilize the algorithms
+3) enjoy!
 
