@@ -30,10 +30,10 @@ def algo():
     t_max = len(losses)
 
     #initialization
+    counter = 1
     delta = 0
     psi = 1.62
     budget = 0
-    mixability_gap = 0
     learning_rate = psi
     index_selection = [i for i in range(k)]
     weights = [1/k] * k
@@ -45,8 +45,13 @@ def algo():
     for t in range(t_max):
         #if is the first round or the cumulative mixability gap exceeded the budget
         if t == 0 or delta >= budget:
-            ##start new segment
+            if t==0:
+                counter = 1
+            else:
+                counter = counter + 1
 
+            ##start new segment
+            print("Start new segment, delta = ", delta, "_____________________________________________________________________________________\n")
             #update learning rate, budget, cumulative mixability gap, weights vector
             learning_rate = learning_rate/psi
             budget = (1/(math.e - 1) + 1/learning_rate)*math.log(k)
@@ -77,22 +82,31 @@ def algo():
 
         ##prepare for next round
 
-        #update the value of  the cumulative mixabilty gap TODO: check che funzioni
-        mixability_gap = 0
+        #update the value of  the cumulative mixabilty gap
+        log_argument = 0
         for i in range(k):
-            mixability_gap = mixability_gap + weights[i] * math.exp(- learning_rate * losses[t][i])
-        delta = delta + numpy.inner(weights, losses[t]) + 1/learning_rate * math.log(mixability_gap)
+            log_argument = log_argument + weights[i] * math.exp(-learning_rate * losses[t][i])
+        print("Log argument: ", log_argument, "\n")
+        print("Delta prima: ", delta, "\n")
+        print("budget: ", budget, "\n")
+        print("weights: ", weights, "\n")
+        print("losses: ", losses[t], "\n")
+        print("Differenza: ", numpy.inner(weights, losses[t]) + 1/learning_rate * math.log(log_argument), "\n")
+        delta = delta + numpy.inner(weights, losses[t]) + 1/learning_rate * math.log(log_argument)
+        print("Delta dopo: ", delta, "\n")
+        #update weights vector
 
-        #update weights vector TODO: check che funzioni
         for i in range(k):
-            weights[i] = weights[i] * math.exp(- learning_rate * losses[t][i])/mixability_gap
+            weights[i] = weights[i] * math.exp(- learning_rate * losses[t][i])/log_argument
 
-    print(regret[t_max - 1])
-    print(min(expert_losses))
-    print(cumulative_loss[t_max - 1])
-
+    #print(regret[t_max - 1])
+    #print(min(expert_losses))
+    #print(cumulative_loss[t_max - 1])
+    print(counter)
     plt.plot([(i + 1) for i in range(t_max)], cumulative_loss, "b-", label="cumulative loss")
     plt.plot([(i + 1) for i in range(t_max)], regret, "r.", label="regret")
     plt.legend(loc='upper left')
     plt.show()
+
+
 
