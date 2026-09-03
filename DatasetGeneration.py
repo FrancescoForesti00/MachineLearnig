@@ -31,8 +31,15 @@ if choice == '1':
     for i in range(k):
         if i == 0:
             loss_probability[i] = 0.3
+        elif i == 1:
+            loss_probability[i] = 0.4
+        elif i == 2:
+            loss_probability[i] = 0.45
+        elif i == 3:
+            loss_probability[i] = 0.5
         else:
             loss_probability[i] = 0.5
+
     losses = rng.binomial(1, loss_probability, size=(T, k))
 
 

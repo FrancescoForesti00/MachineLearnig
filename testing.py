@@ -3,8 +3,12 @@
 import numpy as np
 
 
-losses = np.loadtxt('Losses//Stochastic_losses')
 
-n = len(losses[0])
-T = len(losses)
-print(T)
+regrets = []
+
+print(regrets)
+
+regrets.append([1,2])
+print(regrets)
+regrets.append([3,4])
+print(regrets)

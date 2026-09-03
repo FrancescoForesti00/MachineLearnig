@@ -31,12 +31,12 @@ def algo():
     #initialization
     counter = 1
     delta = 0
-    psi = 1.62
+    psi = 2
     budget = 0
     learning_rate = psi
     index_selection = [i for i in range(k)]
     weights = [1/k] * k
-    probabilities = [0] * k
+    probabilities = [0.0] * k
     regret = [0] * t_max
     cumulative_loss = [0] * t_max
     expert_losses = [0] * k
@@ -68,7 +68,10 @@ def algo():
         chosen = np.random.choice(index_selection, None, True, probabilities)
 
         # cumulative loss update
-        cumulative_loss[t] = cumulative_loss[t - 1] + losses[t][chosen]
+        if t==0:
+            cumulative_loss[t] = losses[t][chosen]
+        else:
+            cumulative_loss[t] = cumulative_loss[t-1] + losses[t][chosen]
 
         #expert losses update
         for i in range(k):
