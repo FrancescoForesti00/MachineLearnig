@@ -1,5 +1,4 @@
 #Implementation from scratch of the adaptive hedge algorithm with a dynamic learning rate
-#TODO: rimozione T
 
 import math
 import numpy
@@ -51,7 +50,6 @@ def algo():
                 counter = counter + 1
 
             ##start new segment
-            print("Start new segment, delta = ", delta, "_____________________________________________________________________________________\n")
             #update learning rate, budget, cumulative mixability gap, weights vector
             learning_rate = learning_rate/psi
             budget = (1/(math.e - 1) + 1/learning_rate)*math.log(k)
@@ -77,7 +75,7 @@ def algo():
             expert_losses[i] = expert_losses[i] + losses[t][i]
 
         # regret
-        regret[t] = cumulative_loss[t]/(t + 1) - min(expert_losses)/(t + 1)
+        regret[t] = cumulative_loss[t] - min(expert_losses)
 
 
         ##prepare for next round
@@ -86,22 +84,15 @@ def algo():
         log_argument = 0
         for i in range(k):
             log_argument = log_argument + weights[i] * math.exp(-learning_rate * losses[t][i])
-        print("Log argument: ", log_argument, "\n")
-        print("Delta prima: ", delta, "\n")
-        print("budget: ", budget, "\n")
-        print("weights: ", weights, "\n")
-        print("losses: ", losses[t], "\n")
-        print("Differenza: ", numpy.inner(weights, losses[t]) + 1/learning_rate * math.log(log_argument), "\n")
         delta = delta + numpy.inner(weights, losses[t]) + 1/learning_rate * math.log(log_argument)
-        print("Delta dopo: ", delta, "\n")
-        #update weights vector
 
+        #update weights vector
         for i in range(k):
             weights[i] = weights[i] * math.exp(- learning_rate * losses[t][i])/log_argument
 
-    #print(regret[t_max - 1])
-    #print(min(expert_losses))
-    #print(cumulative_loss[t_max - 1])
+    print(regret[t_max - 1])
+    print(min(expert_losses))
+    print(cumulative_loss[t_max - 1])
     print(counter)
     plt.plot([(i + 1) for i in range(t_max)], cumulative_loss, "b-", label="cumulative loss")
     plt.plot([(i + 1) for i in range(t_max)], regret, "r.", label="regret")

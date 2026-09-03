@@ -57,7 +57,7 @@ def algo():
             expert_losses[i] = expert_losses[i] + losses[t][i]
 
         # regret
-        regret[t] = cumulative_loss[t]/(t + 1) - min(expert_losses)/(t + 1)
+        regret[t] = cumulative_loss[t] - min(expert_losses)
 
         #update the weights
         for i in range(k):

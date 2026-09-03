@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.22)  18 JUN 2026 19:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.22)  31 AUG 2026 23:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/francesco/PycharmProjects/MachineLearnig/Report/Report.tex
-(/home/francesco/PycharmProjects/MachineLearnig/Report/Report.tex
+**Report.tex
+(./Report.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -31,8 +31,7 @@ Type X to quit or <RETURN> to proceed,
 or enter new name. (Default extension: sty)
 
 Enter file name: 
-/home/francesco/PycharmProjects/MachineLearnig/Report/Report.tex:30: Emergency 
-stop.
+./Report.tex:30: Emergency stop.
 <read *> 
          
 l.30 \usepackage
@@ -41,12 +40,11 @@ l.30 \usepackage
 
  
 Here is how much of TeX's memory you used:
- 245 strings out of 469514
- 3197 string characters out of 5470072
+ 244 strings out of 469514
+ 3037 string characters out of 5470072
  433756 words of memory out of 5000000
  28988 multiletter control sequences out of 15000+600000
  627721 words of font info for 40 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 35i,0n,38p,186b,36s stack positions out of 10000i,1000n,20000p,200000b,200000s
-/home/francesco/PycharmProjects/MachineLearnig/Report/Report.tex:30:  ==> Fatal
- error occurred, no output PDF file produced!
+ 35i,0n,38p,132b,36s stack positions out of 10000i,1000n,20000p,200000b,200000s
+./Report.tex:30:  ==> Fatal error occurred, no output PDF file produced!
