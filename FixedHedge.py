@@ -38,15 +38,13 @@ def algo():
     print("How many iterations would you like to run?\n")
     n = int(input())
     all_regrets = [[0]*t_max for _ in range(n)]
-
+    all_cumulative_losses = [[0]*t_max for _ in range(n)]
 
     for s in range(n):
         #initialization
         index_selection = [i for i in range(k)]
         weights = [1.0] * k
         probabilities = [0.0] * k
-        #regret = [0] * t_max
-        cumulative_loss = [0] * t_max
         expert_losses = [0] * k
 
         #iteration of the algorithm
@@ -61,14 +59,17 @@ def algo():
 
 
             #cumulative loss update
-            cumulative_loss[t] = cumulative_loss[t-1] + losses[t][chosen]
+            if t == 0:
+                all_cumulative_losses[s][t] = losses[t][chosen]
+            else:
+                all_cumulative_losses[s][t] = all_cumulative_losses[s][t - 1] + losses[t][chosen]
 
             #expert losses update
             for i in range(k):
                 expert_losses[i] = expert_losses[i] + losses[t][i]
 
             # regret
-            all_regrets[s][t] = cumulative_loss[t] - min(expert_losses)
+            all_regrets[s][t] = all_cumulative_losses[s][t] - min(expert_losses)
 
             #update the weights
             for i in range(k):
@@ -76,20 +77,23 @@ def algo():
 
 
     regret = [0.0]*t_max
+    cumulative_loss = [0.0]*t_max
+
 
     for t in range(t_max):
         for i in range(n):
             regret[t] = regret[t] + all_regrets[i][t]
+            cumulative_loss[t] = cumulative_loss[t] + all_cumulative_losses[i][t]
         regret[t] = regret[t]/n
+        cumulative_loss[t] = cumulative_loss[t]/n
 
     print(regret[t_max - 1])
     #print(min(expert_losses))
-    #print(cumulative_loss[t_max - 1])
+    print(cumulative_loss[t_max - 1])
 
     plt.grid(True)
     plt.xlabel('Turns')
-    #plt.plot(cumulative_loss)
-    #plt.plot([(i + 1) for i in range(t_max)], cumulative_loss, "b-", label= "cumulative loss")
+    plt.plot(cumulative_loss[::100], "b-", label= "cumulative loss")
     plt.plot( regret[::100], "ro-", label = "regret")
     plt.legend(loc = 'lower right')
     plt.show()
