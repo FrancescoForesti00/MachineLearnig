@@ -90,7 +90,7 @@ def algo():
 
             ##prepare for next round
 
-            #update the value of  the cumulative mixabilty gap
+            #update the value of  the cumulative mixabilty gap(delta grande)
             log_argument = 0
             for i in range(k):
                 log_argument = log_argument + weights[i] * math.exp(-learning_rate * losses[t][i])

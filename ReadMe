@@ -2,7 +2,8 @@ Project for the course Statistical Methods for Machine Learning, Prof Nicolò Ce
 
 INSTRUCTIONS:
 
-1) run the dataset generation file to creates the synthetic losses
-2) run the console file to utilize the algorithms
-3) enjoy!
+1)To create a specific data set run the DatasetGeneration.py file. They will be saved in the losses folder.
+2)To test the algorithms run the console.py file and select the preferred options(learning rate, number of iterations, ...)
+3)The report folder contains the report ;)
+
 

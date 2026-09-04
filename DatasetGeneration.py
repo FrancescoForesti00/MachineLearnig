@@ -31,12 +31,6 @@ if choice == '1':
     for i in range(k):
         if i == 0:
             loss_probability[i] = 0.3
-        elif i == 1:
-            loss_probability[i] = 0.4
-        elif i == 2:
-            loss_probability[i] = 0.45
-        elif i == 3:
-            loss_probability[i] = 0.5
         else:
             loss_probability[i] = 0.5
 
@@ -48,7 +42,6 @@ elif choice == '2':
     for t in range(T):
         #select one of the experts to be the best
         best_of_turn = random.randint(0, k-1)
-        #print('Best Turn ', t, ':', best_of_turn,  "\n")
         for i in range(k):
             if i == best_of_turn:
                 adversarial_loss_probability[t][i] = 0.3
