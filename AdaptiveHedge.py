@@ -97,8 +97,11 @@ def algo():
     print(min(expert_losses))
     print(cumulative_loss[t_max - 1])
     print(counter)
-    plt.plot([(i + 1) for i in range(t_max)], cumulative_loss, "b-", label="cumulative loss")
-    plt.plot([(i + 1) for i in range(t_max)], regret, "r.", label="regret")
+
+    plt.grid(True)
+    plt.xlabel('Turns')
+    #plt.plot([(i + 1) for i in range(t_max)], cumulative_loss, "b-", label="cumulative loss")
+    plt.plot( regret[::100], "ro-", label = "regret")
     plt.legend(loc='upper left')
     plt.show()
 
