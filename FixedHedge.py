@@ -75,7 +75,7 @@ def algo():
             for i in range(k):
                 weights[i] = weights[i]*math.exp(-(learning_rate*losses[t][i]))
 
-
+    #calculate the mean
     regret = [0.0]*t_max
     cumulative_loss = [0.0]*t_max
 
